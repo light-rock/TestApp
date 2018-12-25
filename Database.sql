@@ -196,7 +196,11 @@ select count(*) from states;
 /* Count 10 persons */
 select count(*) from person;
 
+/* Check the procedure that lists all the states */
 exec uspStatesList;
 
+/* Find the updated person 'Newsomebody' */
 exec uspPersonSearch 'New%';
-exec uspPersonSearch 'AZ';
+
+/* Find customer(s) located in AK */
+exec uspPersonSearch 'AL';
