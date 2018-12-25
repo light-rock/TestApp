@@ -76,6 +76,7 @@ AS
 	first_name, 
 	last_name, 
 	gender, 
+	person.state_id,
 	states.state_code 
   FROM [dbo].[person] 
   INNER JOIN states on states.state_id = person.state_id
@@ -192,4 +193,3 @@ select count(*) from person;
 exec uspStatesList;
 
 exec uspPersonSearch 'New%';
-
