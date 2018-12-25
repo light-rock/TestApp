@@ -202,5 +202,5 @@ exec uspStatesList;
 /* Find the updated person 'Newsomebody' */
 exec uspPersonSearch 'New%';
 
-/* Find customer(s) located in AK */
+/* Find customer(s) located in AL */
 exec uspPersonSearch 'AL';
