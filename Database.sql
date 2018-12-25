@@ -64,11 +64,17 @@ AS
    insert into [dbo].[states] ([state_code]) values (@statecode)
 GO  
 
+/*
+  Get all states, ordered by state_code 'AZ', etc.,
+*/
 CREATE PROCEDURE dbo.uspStatesList 
 AS
   select * from states order by state_code
 GO
 
+/*
+  Search for a person, in all fields using a single parameter
+*/
 CREATE PROCEDURE dbo.uspPersonSearch @search varchar(50)
 AS
   SELECT 
@@ -80,7 +86,7 @@ AS
 	states.state_code 
   FROM [dbo].[person] 
   INNER JOIN states on states.state_id = person.state_id
-  WHERE first_name like @search or last_name like @search or gender like @search or dob like @search
+  WHERE first_name like @search or last_name like @search or gender like @search or dob like @search or states.state_code like @search
 GO
 
 /*
@@ -193,3 +199,4 @@ select count(*) from person;
 exec uspStatesList;
 
 exec uspPersonSearch 'New%';
+exec uspPersonSearch 'AZ';
