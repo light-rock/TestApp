@@ -71,7 +71,15 @@ GO
 
 CREATE PROCEDURE dbo.uspPersonSearch @search varchar(50)
 AS
-  SELECT * from [dbo].[person] where first_name like @search or last_name like @search or gender like @search or dob like @search
+  SELECT 
+    person_id, 
+	first_name, 
+	last_name, 
+	gender, 
+	states.state_code 
+  FROM [dbo].[person] 
+  INNER JOIN states on states.state_id = person.state_id
+  WHERE first_name like @search or last_name like @search or gender like @search or dob like @search
 GO
 
 /*
@@ -184,3 +192,4 @@ select count(*) from person;
 exec uspStatesList;
 
 exec uspPersonSearch 'New%';
+
