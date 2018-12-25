@@ -26,6 +26,12 @@ GO
 DROP PROCEDURE IF EXISTS [dbo].[uspPersonUpsert];
 GO
 
+DROP PROCEDURE IF EXISTS [dbo].[uspPersonSearch];
+GO
+
+DROP PROCEDURE IF EXISTS [dbo].[uspStatesList];
+GO
+
 
 /* CREATE TABLES */
 CREATE TABLE states (
@@ -57,6 +63,16 @@ CREATE PROCEDURE dbo.appendState @statecode char(2)
 AS   
    insert into [dbo].[states] ([state_code]) values (@statecode)
 GO  
+
+CREATE PROCEDURE dbo.uspStatesList 
+AS
+  select * from states order by state_code
+GO
+
+CREATE PROCEDURE dbo.uspPersonSearch @search varchar(50)
+AS
+  SELECT * from [dbo].[person] where first_name like @search or last_name like @search or gender like @search or dob like @search
+GO
 
 /*
    Append/Update a person record 
@@ -164,3 +180,7 @@ select count(*) from states;
 
 /* Count 10 persons */
 select count(*) from person;
+
+exec uspStatesList;
+
+exec uspPersonSearch 'New%';
